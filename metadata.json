@@ -1,0 +1,6 @@
+{
+  "name": "CodeSherlock",
+  "description": "Free, AI-assisted cross-file repository investigation, deterministic debugging engine, and patch verification tool.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

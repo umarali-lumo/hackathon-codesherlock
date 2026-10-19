@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --vv-bg: #000000;
+  --vv-bg-elevated: #111111;
+  --vv-surface: #141414;
+  --vv-surface-2: #181818;
+  --vv-surface-strong: #1f1f1f;
+  --vv-border: rgba(255, 255, 255, 0.09);
+  --vv-border-strong: rgba(255, 255, 255, 0.16);
+  --vv-text-primary: #ffffff;
+  --vv-text-strong: #d8d8d8;
+  --vv-text-muted: #9a9a9a;
+  --vv-text-subtle: #7d7d7d;
+  --vv-text-dim: #757575;
+  --vv-nav-bg: rgba(0, 0, 0, 0.75);
+  --vv-future-wash: linear-gradient(158deg, #262626, #171717 34%, #0b0b0b 68%, #000000);
+  --vv-card-lift: rgba(255, 255, 255, 0.04);
+}
+
+@layer base {
+  body {
+    background-color: var(--vv-bg);
+    color: var(--vv-text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.015em;
+    overflow-x: hidden;
+  }
+}
+
+/* Visuvate Pulse Equalizer Animation */
+@keyframes vvPulseBar {
+  0% { transform: scaleY(var(--initial-scale, 1)); }
+  50% { transform: scaleY(calc(var(--initial-scale, 1) * 0.4)); }
+  100% { transform: scaleY(var(--initial-scale, 1)); }
+}
+
+.vv-pulse-bar {
+  animation: vvPulseBar 1.6s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+/* Custom sleek scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+}
