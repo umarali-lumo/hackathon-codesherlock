@@ -101,8 +101,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
   return (
     <div className="min-h-screen bg-[#000000] text-white selection:bg-neutral-800 selection:text-white font-sans antialiased">
-      {/* Visuvate-style Floating Minimalist Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#000000]/80 backdrop-blur-md border-b border-white/[0.08]">
+      {/* Minimalist Navigation */}
+      <header className="sticky top-0 left-0 right-0 z-40 bg-[#000000] border-b border-white/[0.08]">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Brand Mark */}
           <a href="#" className="flex items-center gap-2 text-white font-semibold text-sm tracking-tight">
@@ -142,7 +142,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </header>
 
       {/* HERO SECTION */}
-      <section className="pt-32 pb-20 px-6 max-w-5xl mx-auto text-center flex flex-col items-center">
+      <section className="pt-16 pb-20 px-6 max-w-5xl mx-auto text-center flex flex-col items-center">
         {/* Subtle Equalizer Indicator */}
         <div className="flex items-end justify-center gap-1 h-6 w-16 mb-8 opacity-80">
           {barScales.slice(0, 7).map((scale, i) => (

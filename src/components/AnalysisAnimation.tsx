@@ -26,15 +26,15 @@ export const AnalysisAnimation: React.FC<AnalysisAnimationProps> = ({
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 400);
+          setTimeout(onComplete, 120);
           return 100;
         }
-        const next = prev + 4;
+        const next = prev + 8;
         const stepIdx = Math.min(steps.length - 1, Math.floor((next / 100) * steps.length));
         setCurrentStepIndex(stepIdx);
         return next;
       });
-    }, 40);
+    }, 20);
 
     return () => clearInterval(interval);
   }, [onComplete]);

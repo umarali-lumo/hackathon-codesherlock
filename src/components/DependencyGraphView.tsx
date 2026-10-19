@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Network, ArrowRight, CornerDownRight, FileCode, CheckCircle2, HelpCircle } from 'lucide-react';
 import { RepositoryData, SymbolInfo } from '../types';
 import { buildCrossFileDependencies } from '../utils/pythonParser';
@@ -12,21 +12,30 @@ export const DependencyGraphView: React.FC<DependencyGraphViewProps> = ({
   repo,
   onNavigateToSource
 }) => {
-  const { definedSymbols, callEdges } = buildCrossFileDependencies(repo.analyses);
-  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(
+  const { definedSymbols, callEdges } = useMemo(
+    () => buildCrossFileDependencies(repo.analyses),
+    [repo.analyses]
+  );
+
+  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(() => 
     definedSymbols.has('apply_discount') ? 'apply_discount' : Array.from(definedSymbols.keys())[0] || null
   );
 
   // Filter edges for selected symbol
-  const callers = selectedSymbol
-    ? callEdges.filter(e => e.calleeFunction === selectedSymbol)
-    : [];
+  const callers = useMemo(
+    () => selectedSymbol ? callEdges.filter(e => e.calleeFunction === selectedSymbol) : [],
+    [selectedSymbol, callEdges]
+  );
 
-  const callees = selectedSymbol
-    ? callEdges.filter(e => e.callerFunction === selectedSymbol)
-    : [];
+  const callees = useMemo(
+    () => selectedSymbol ? callEdges.filter(e => e.callerFunction === selectedSymbol) : [],
+    [selectedSymbol, callEdges]
+  );
 
-  const crossFileEdges = callEdges.filter(e => e.isCrossFile);
+  const crossFileEdges = useMemo(
+    () => callEdges.filter(e => e.isCrossFile),
+    [callEdges]
+  );
 
   return (
     <div className="flex-1 flex flex-col h-full bg-[#000000] text-neutral-200 overflow-y-auto p-4 md:p-6 space-y-6 font-sans">

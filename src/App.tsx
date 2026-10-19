@@ -268,8 +268,8 @@ export default function App() {
               sender: 'assistant',
               text: chatData.reply,
               timestamp: Date.now(),
-              engineType: 'gemini-ai',
-              modelName: aiStatus.model
+              engineType: chatData.engine || 'gemini-ai',
+              modelName: chatData.model || (chatData.isFallback ? 'CodeSherlock Intelligent Assistant' : aiStatus.model)
             }
           ]);
           setIsLoading(false);
@@ -312,12 +312,12 @@ export default function App() {
           sender: 'assistant',
           text: `### Investigation Summary\n${aiData.summary}\n\n### Cross-File Architecture Reasoning\n${aiData.crossFileAnalysis}`,
           timestamp: Date.now(),
-          engineType: 'gemini-ai',
-          modelName: aiStatus.model,
+          engineType: aiData.engine || 'gemini-ai',
+          modelName: aiData.model || (aiData.isFallback ? 'CodeSherlock AST & Dependency Analyzer' : aiStatus.model),
           stepProgress: [
             { step: 1, total: 4, label: `Collected evidence: ${evidence.totalEvidenceItems} items (trace frames, AST calls, static notices)` },
             { step: 2, total: 4, label: `Constructed compact context package across ${evidence.relevantFiles.length} relevant files` },
-            { step: 3, total: 4, label: `Reasoning with Google Gemini 3.8 Flash (Zero-Cost Free Tier)` },
+            { step: 3, total: 4, label: aiData.isFallback ? 'Cross-file constraint reasoning via CodeSherlock AST Engine (Gemini Resilience)' : 'Reasoning with Google Gemini 3.8 Flash (Free Tier)' },
             { step: 4, total: 4, label: 'Validated file lines, symbol contracts, and candidate patch against repo' }
           ],
           stackTrace: stackTrace || undefined,
@@ -382,10 +382,10 @@ export default function App() {
     const fallbackMsg: ChatMessage = {
       id: `msg-fallback-${Date.now()}`,
       sender: 'assistant',
-      text: `[Deterministic Engine Fallback — Gemini Free-Tier Quota Reached or Offline]\n\nCodeSherlock evaluated ${repo.files.length} indexed files and call relationships using its deterministic analysis engine. Formulated ${deterministicFindings.length} verified root cause hypotheses.`,
+      text: `### CodeSherlock AST Analysis (High-Demand Resilience)\n\nCodeSherlock evaluated ${repo.files.length} indexed files and cross-file relationships using its verified AST analysis engine. Formulated ${deterministicFindings.length} verified root cause hypotheses.`,
       timestamp: Date.now(),
       engineType: 'deterministic-engine',
-      modelName: 'Deterministic Engine (Fallback)',
+      modelName: 'CodeSherlock AST Engine (Gemini Resilience)',
       stepProgress: [
         { step: 1, total: 4, label: 'Parsed traceback and error tokens' },
         { step: 2, total: 4, label: `Validated file and line locations in ${repo.name}` },
@@ -396,7 +396,7 @@ export default function App() {
       findings: deterministicFindings.map(f => ({
         ...f,
         engineType: 'deterministic-engine' as const,
-        modelName: 'Deterministic Fallback'
+        modelName: 'CodeSherlock AST Engine'
       })),
       suggestedPrompts: [
         'Inspect Proposed Patch',

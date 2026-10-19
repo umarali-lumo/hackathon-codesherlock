@@ -18,6 +18,12 @@
   --vv-card-lift: rgba(255, 255, 255, 0.04);
 }
 
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+}
+
 @layer base {
   body {
     background-color: var(--vv-bg);
@@ -28,16 +34,17 @@
   }
 }
 
-/* Visuvate Pulse Equalizer Animation */
+/* Visuvate Pulse Equalizer Animation with GPU acceleration */
 @keyframes vvPulseBar {
-  0% { transform: scaleY(var(--initial-scale, 1)); }
-  50% { transform: scaleY(calc(var(--initial-scale, 1) * 0.4)); }
-  100% { transform: scaleY(var(--initial-scale, 1)); }
+  0% { transform: scaleY(var(--initial-scale, 1)) translateZ(0); }
+  50% { transform: scaleY(calc(var(--initial-scale, 1) * 0.4)) translateZ(0); }
+  100% { transform: scaleY(var(--initial-scale, 1)) translateZ(0); }
 }
 
 .vv-pulse-bar {
   animation: vvPulseBar 1.6s ease-in-out infinite;
   transform-origin: bottom;
+  will-change: transform;
 }
 
 /* Custom sleek scrollbars */

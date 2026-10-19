@@ -83,6 +83,11 @@ export const SourceViewer: React.FC<SourceViewerProps> = ({
   const lines = useMemo(() => file ? file.content.split('\n') : [], [file]);
   const langMeta = useMemo(() => file ? detectFileLanguage(file.path) : { id: 'plaintext', name: 'Plain Text', color: '#888', extensions: [] }, [file]);
 
+  // Pre-tokenize all lines once on file change - eliminates lag on scroll, hover, and search
+  const tokenizedLines = useMemo(() => {
+    return lines.map(line => tokenizeCodeLine(line, langMeta.id));
+  }, [lines, langMeta.id]);
+
   // Matching line indices for search
   const matchedLineNumbers = useMemo(() => {
     if (!searchTerm.trim()) return [];
@@ -337,8 +342,8 @@ export const SourceViewer: React.FC<SourceViewerProps> = ({
           const isCurrentMatch = matchesSearch && matchedLineNumbers[currentMatchIndex] === lineNum;
           const isErrorLine = file.path.includes('pricing') && lineNum === 23;
 
-          // Multi-Language Tokenizer
-          const tokens = tokenizeCodeLine(line, langMeta.id);
+          // Multi-Language Tokenizer lookup (O(1) precomputed)
+          const tokens = tokenizedLines[idx] || [];
 
           return (
             <div

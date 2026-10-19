@@ -103,7 +103,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
   return (
     <div className="flex flex-col h-screen w-screen bg-[#000000] text-neutral-100 overflow-hidden font-sans select-none antialiased">
       {/* Top Navigation Bar in Visuvate Style */}
-      <header className="h-14 border-b border-white/[0.08] bg-[#000000]/90 px-4 flex items-center justify-between z-20 backdrop-blur-md">
+      <header className="h-14 border-b border-white/[0.08] bg-[#000000] px-4 flex items-center justify-between z-20">
         {/* Left: Back to Home + Project Breadcrumb */}
         <div className="flex items-center gap-3">
           <button
