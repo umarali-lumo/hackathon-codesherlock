@@ -151,11 +151,11 @@ Replace the placeholders below with the actual team names and verified contribut
 
 | Team member | Contribution |
 |---|---|
-| **[Member 1 — Name]** | [Project concept, requirements, coordination, and product direction] |
-| **[Member 2 — Name]** | [Frontend, user interface, and website interaction flow] |
-| **[Member 3 — Name]** | [Backend APIs, AI model integration, and prompt/evidence workflow] |
-| **[Member 4 — Name]** | [Repository parsing, diagnostic logic, patch review, testing, and validation] |
-| **[Member 5 — Name, if applicable]** | [UI/UX, product testing, screenshots, documentation, and presentation] |
+| **Syed Umar Ali** | [Project Lead, requirements, coordination, and product direction] |
+| **Syeda Noor Fatima** | [Frontend, user interface, and website interaction flow] |
+| **Syed Abeer Ali** | [Backend APIs, AI model integration, and prompt/evidence workflow] |
+| **Hannan Sidiq** | [Repository parsing, diagnostic logic, patch review, testing, and validation] |
+| **Muhammad Ahmed** | [UI/UX, product testing, screenshots, documentation, and presentation] |
 
 If responsibilities overlapped, describe the shared work rather than forcing an artificial division.
 
